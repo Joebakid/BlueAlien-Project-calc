@@ -84,7 +84,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>ETH Donation to Token Calculator</h1>
+      <h1 className="center">ETH Donation to Token Calculator</h1>
 
       {ethPrice ? (
         <p>Current ETH Price: ${ethPrice.toFixed(2)}</p>
