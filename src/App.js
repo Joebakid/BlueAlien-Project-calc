@@ -72,9 +72,9 @@ const App = () => {
     doc.text("Donation Report", 10, 10);
     donors.forEach((donor, index) => {
       doc.text(
-        `${index + 1}. ${donor.name} donated ${donor.eth} ETH and received ${
-          donor.tokens
-        } tokens.`,
+        `${index + 1}. ${donor.name} donated ${
+          donor.eth
+        } ETH and received ${donor.tokens.toLocaleString()} tokens.`,
         10,
         20 + index * 10
       );
@@ -119,12 +119,15 @@ const App = () => {
       <button onClick={calculateTokens}>Calculate Tokens</button>
 
       {ethToTokenRate > 0 && (
-        <p>For 1 ETH, you will receive {ethToTokenRate} tokens.</p>
+        <p>
+          For 1 ETH, you will receive {ethToTokenRate.toLocaleString()} tokens.
+        </p>
       )}
 
       {tokensReceived !== null && (
         <p>
-          You will receive {tokensReceived} tokens for donating {ethAmount} ETH.
+          You will receive {tokensReceived.toLocaleString()} tokens for donating{" "}
+          {ethAmount} ETH.
         </p>
       )}
 
@@ -136,20 +139,19 @@ const App = () => {
       )}
 
       <h2>Donor List:</h2>
-      <ul>
+      <ul style={{ margin: "10px", listStyle: "number" }}>
         {donors.map((donor, index) => (
           <li key={index}>
-            {donor.name} donated {donor.eth} ETH and received {donor.tokens}{" "}
-            tokens.
+            {donor.name} donated {donor.eth} ETH and received{" "}
+            {donor.tokens.toLocaleString()} tokens.
           </li>
         ))}
       </ul>
 
-      <button onClick={downloadPDF}>Download as PDF</button>
-      <button
-        onClick={resetDonors}
-        style={{ marginLeft: "10px", color: "red" }}
-      >
+      <button style={{ margin: "10px" }} onClick={downloadPDF}>
+        Download as PDF
+      </button>
+      <button onClick={resetDonors} style={{ margin: "10px", color: "red" }}>
         Reset Donor List
       </button>
     </div>
